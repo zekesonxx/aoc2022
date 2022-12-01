@@ -36,9 +36,8 @@ pub fn part2(input: &[usize]) -> usize {
 
 #[aoc(day1, part2, faster)]
 pub fn part2_faster(input: &[usize]) -> usize {
-	let elves: Vec<usize> = input.split(|x| *x == 0)
-									  .map(|elf| elf.iter().sum())
-									  .collect();
+	let elves = input.split(|x| *x == 0)
+					 .map(|elf| elf.iter().sum());
 	let (mut a, mut b, mut c) = (0,0,0);
 	for elf in elves {
 		if elf > c {
