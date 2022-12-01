@@ -16,15 +16,15 @@ pub fn part2(input: &[usize]) -> usize {
 
 #[cfg(test)]
 mod tests {
-	use super::{gen, part1, part2};
-	
-	#[test]
-	fn sample1() {
-		assert_eq!(part1(&gen("")), 7);
-	}
-	
-	#[test]
-	fn sample2() {
-		assert_eq!(part2(&gen("")), 5);
-	}
+	const EXAMPLE: &'static str = indoc!{"1
+	2
+	3
+	4
+	5"};
+
+	aoc_tests!(day 1 sample1, EXAMPLE=0; gen:part1);
+	//aoc_tests!(day 1 part1, puzzle=0; gen:part1);
+
+	aoc_tests!(day 1 sample2, EXAMPLE=0; gen:part2);
+	//aoc_tests!(day 1 part2, puzzle=0; gen:part2);
 }
