@@ -2,7 +2,6 @@
 #[aoc_generator(day1)]
 pub fn gen(input: &str) -> Vec<usize> {
         input.split('\n').map(|x| x.parse().unwrap_or(0)).collect()
-		
 }
 
 #[aoc(day1, part1)]
