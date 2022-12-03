@@ -2,6 +2,7 @@
 
 use RPSMove::*;
 use Outcome::*;
+use rayon::prelude::*;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 enum Outcome {
@@ -80,6 +81,19 @@ pub fn part1(input: &[(char, char)]) -> usize {
 	score
 }
 
+#[aoc(day2, part1, variant)]
+pub fn part1_variant(input: &[(char, char)]) -> usize {
+	input.par_iter()
+		.map(|(a, b)| {
+			let a: RPSMove = (*a).into();
+			let b: RPSMove = (*b).into();
+			(a, b)
+		}).map(|(opponent, me)| {
+			me as usize + me.outcome_against(&opponent) as usize
+		})
+		.sum()
+	}
+
 #[aoc(day2, part2)]
 pub fn part2(input: &[(char, char)]) -> usize {
 	let moves: Vec<(RPSMove, Outcome)> = input.iter()
@@ -98,8 +112,8 @@ mod tests {
 	B X
 	C Z"};
 
-	aoc_tests!(day 2 sample1, EXAMPLE=15; gen:part1);
-	aoc_tests!(day 2 part1, puzzle=11767; gen:part1);
+	aoc_tests!(day 2 sample1, EXAMPLE=15; gen:part1, gen:part1_variant);
+	aoc_tests!(day 2 part1, puzzle=11767; gen:part1, gen:part1_variant);
 
 	aoc_tests!(day 2 sample2, EXAMPLE=12; gen:part2);
 	aoc_tests!(day 2 part2, puzzle=13886; gen:part2);
